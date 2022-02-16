@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:miarma_app/screens/profile_screen.dart';
 import 'package:miarma_app/screens/search_screen.dart';
-
+import 'package:miarma_app/widgets/post.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'home_screen.dart';
 
 class MenuScreen extends StatefulWidget {
@@ -23,7 +24,30 @@ class _MenuScreenState extends State<MenuScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: pages[_currentIndex], bottomNavigationBar: _buildBottomBar());
+        body: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 30.0, bottom: 40),
+              child: Row(
+                children: [
+                  Text(
+                    'Miarmapp',
+                    style: GoogleFonts.oleoScript(
+                      color: Colors.black,
+                      textStyle: Theme.of(context).textTheme.headline4,
+                      fontSize: 40,
+                      fontWeight: FontWeight.w100,
+                      fontStyle: FontStyle.normal,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            pages[_currentIndex],
+            Post()
+          ],
+        ),
+        bottomNavigationBar: _buildBottomBar());
   }
 
   Widget _buildBottomBar() {
