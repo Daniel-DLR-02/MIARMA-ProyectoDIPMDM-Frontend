@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:miarma_app/screens/profile_screen.dart';
 import 'package:miarma_app/screens/search_screen.dart';
-import 'package:miarma_app/widgets/post.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'home_screen.dart';
 
@@ -24,30 +23,9 @@ class _MenuScreenState extends State<MenuScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 30.0, bottom: 40),
-              child: Row(
-                children: [
-                  Text(
-                    'Miarmapp',
-                    style: GoogleFonts.oleoScript(
-                      color: Colors.black,
-                      textStyle: Theme.of(context).textTheme.headline4,
-                      fontSize: 40,
-                      fontWeight: FontWeight.w100,
-                      fontStyle: FontStyle.normal,
-                    ),
-                  )
-                ],
-              ),
-            ),
-            pages[_currentIndex],
-            Post()
-          ],
-        ),
-        bottomNavigationBar: _buildBottomBar());
+        body: Container(
+          margin: MediaQuery.of(context).padding,
+          child: pages[_currentIndex]), bottomNavigationBar: _buildBottomBar());
   }
 
   Widget _buildBottomBar() {
@@ -93,19 +71,19 @@ class _MenuScreenState extends State<MenuScreen> {
                 });
               },
               child: Container(
-                padding: const EdgeInsets.all(5),
+                padding: const EdgeInsets.all(0),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
                     border: Border.all(
                         color: _currentIndex == 2
                             ? Colors.black
                             : Colors.transparent,
-                        width: 1)),
+                        width: 3)),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(100),
                   child: Image.asset(
                     'assets/images/avatar.jpg',
-                    width: 30,
+                    height: 30,
                   ),
                 ),
               ),

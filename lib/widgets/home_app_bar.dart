@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomeAppBar({Key? key}) : super(key: key);
@@ -6,14 +7,20 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 20),
+      margin: const EdgeInsets.only(top: 10),
       child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-        Expanded(
-          flex: 1,
-          child: Image.asset(
-            'assets/images/logo_miarmapp.png',
-            width: 100,
-          ),
+        Padding(
+          padding: const EdgeInsets.only( left:17.0),
+          child: Text(
+                      'Miarmapp',
+                      style: GoogleFonts.oleoScript(
+                        color: Colors.black,
+                        textStyle: Theme.of(context).textTheme.headline4,
+                        fontSize: 33,
+                        fontWeight: FontWeight.w100,
+                        fontStyle: FontStyle.normal,
+                      ),
+                    ),
         ),
         Expanded(
             flex: 1,
@@ -21,13 +28,9 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: const [
                 Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Icon(Icons.add_box_outlined),
+                  padding: EdgeInsets.only(right:20.0,top:8),
+                  child: Icon(Icons.add_box_outlined,size:30),
                 ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Icon(Icons.send),
-                )
               ],
             ))
       ]),
