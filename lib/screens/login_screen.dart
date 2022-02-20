@@ -52,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: const TextField(
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: 'Email',
+                          labelText: 'Nick',
                         ),
                       ),
                     ),
