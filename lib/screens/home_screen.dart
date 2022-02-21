@@ -12,6 +12,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    double sizeImage = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: const HomeAppBar(),
       body: ListView(
@@ -35,24 +36,24 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           post('assets/images/landscape.jpg', "Test1",
-              'assets/images/avatar.jpg'),
+              'assets/images/avatar.jpg', sizeImage),
           post('assets/images/landscape2.jpg', "Test2",
-              'assets/images/avatar.jpg'),
+              'assets/images/avatar.jpg', sizeImage),
           post('assets/images/landscape.jpg', "Test1",
-              'assets/images/avatar.jpg'),
+              'assets/images/avatar.jpg', sizeImage),
           post('assets/images/landscape2.jpg', "Test2",
-              'assets/images/avatar.jpg'),
+              'assets/images/avatar.jpg', sizeImage),
           post('assets/images/landscape.jpg', "Test1",
-              'assets/images/avatar.jpg'),
+              'assets/images/avatar.jpg', sizeImage),
           post('assets/images/landscape2.jpg', "Test2",
-              'assets/images/avatar.jpg'),
+              'assets/images/avatar.jpg', sizeImage),
         ],
       ),
     );
   }
 }
 
-Widget post(String image, nick, avatar) {
+Widget post(String image, nick, avatar, double sizeImage) {
   return Column(
     children: <Widget>[
       Padding(
@@ -84,8 +85,8 @@ Widget post(String image, nick, avatar) {
             ]),
       ),
       SizedBox(
-        width: 370,
-        height: 370,
+        width: sizeImage,
+        height: sizeImage,
         child: Image.asset(
           image,
           fit: BoxFit.cover,

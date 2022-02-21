@@ -145,21 +145,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 10.0),
-            Container(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("Name of the user",
-                          style: TextStyle(
-                            color: Colors.black.withOpacity(.8),
-                          )),
-                      Text("Seville",
-                          style: TextStyle(
-                            color: Colors.black.withOpacity(.8),
-                          )),
-                    ])),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 0),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Container(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Name of the user",
+                              style: TextStyle(
+                                color: Colors.black.withOpacity(.8),
+                                fontWeight: FontWeight.bold,
+                              )),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 20.0),
+                            child: Text("Seville",
+                                style: TextStyle(
+                                  color: Colors.black.withOpacity(.8),
+                                )),
+                          ),
+                        ])),
+              ),
+            ),
             const SizedBox(height: 12.0),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               Container(
