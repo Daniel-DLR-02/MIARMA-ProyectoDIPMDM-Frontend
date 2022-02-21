@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.only(top:20.0),
+                  padding: const EdgeInsets.only(top: 20.0),
                   child: Text(
                     'Publicaciones',
                     style: TextStyle(
@@ -34,73 +34,80 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          
-          post('assets/images/avatar.jpg', "Test1",'assets/images/avatar.jpg'),
-          post('assets/images/avatar.jpg', "Test2",'assets/images/avatar.jpg'),
-          post('assets/images/avatar.jpg', "Test3",'assets/images/avatar.jpg'),
-          post('assets/images/avatar.jpg', "Test4",'assets/images/avatar.jpg'),
-          post('assets/images/avatar.jpg', "Test5",'assets/images/avatar.jpg'),
+          post('assets/images/landscape.jpg', "Test1",
+              'assets/images/avatar.jpg'),
+          post('assets/images/landscape2.jpg', "Test2",
+              'assets/images/avatar.jpg'),
+          post('assets/images/landscape.jpg', "Test1",
+              'assets/images/avatar.jpg'),
+          post('assets/images/landscape2.jpg', "Test2",
+              'assets/images/avatar.jpg'),
+          post('assets/images/landscape.jpg', "Test1",
+              'assets/images/avatar.jpg'),
+          post('assets/images/landscape2.jpg', "Test2",
+              'assets/images/avatar.jpg'),
         ],
       ),
     );
   }
 }
 
-
-Widget post(String image, nick,avatar) {
+Widget post(String image, nick, avatar) {
   return Column(
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
-          child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Container(
-                      height: 40.0,
-                      width: 40.0,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: AssetImage(
-                                  avatar))),
-                    ),
-                    const SizedBox(width: 10.0),
-                    Text(
-                      nick,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    )
-                  ],
-                ),
-                IconButton(
-                  icon: const Icon(Icons.more_vert),
-                  onPressed: () {},
-                )
-              ]),
-        ),
-        Image.asset(
-          image,
-          fit: BoxFit.cover,
-        ),
-        Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Row(
+    children: <Widget>[
+      Padding(
+        padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
+        child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  IconButton(
-                    icon: const Icon(Icons.favorite_border),
-                    onPressed: () {},
+                  Container(
+                    height: 40.0,
+                    width: 40.0,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            fit: BoxFit.fill, image: AssetImage(avatar))),
+                  ),
+                  const SizedBox(width: 10.0),
+                  Text(
+                    nick,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   )
                 ],
               ),
-            ],
-          ),
+              IconButton(
+                icon: const Icon(Icons.more_vert),
+                onPressed: () {},
+              )
+            ]),
+      ),
+      SizedBox(
+        width: 370,
+        height: 370,
+        child: Image.asset(
+          image,
+          fit: BoxFit.cover,
         ),
-      ],
-    );
+      ),
+      Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                IconButton(
+                  icon: const Icon(Icons.favorite_border),
+                  onPressed: () {},
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
+    ],
+  );
 }

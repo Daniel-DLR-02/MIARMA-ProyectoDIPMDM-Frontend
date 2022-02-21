@@ -10,17 +10,17 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       margin: const EdgeInsets.only(top: 10),
       child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
         Padding(
-          padding: const EdgeInsets.only( left:17.0),
+          padding: const EdgeInsets.only(left: 17.0),
           child: Text(
-                      'Miarmapp',
-                      style: GoogleFonts.oleoScript(
-                        color: Colors.black,
-                        textStyle: Theme.of(context).textTheme.headline4,
-                        fontSize: 33,
-                        fontWeight: FontWeight.w100,
-                        fontStyle: FontStyle.normal,
-                      ),
-                    ),
+            'Miarmapp',
+            style: GoogleFonts.oleoScript(
+              color: Colors.black,
+              textStyle: Theme.of(context).textTheme.headline4,
+              fontSize: 33,
+              fontWeight: FontWeight.w100,
+              fontStyle: FontStyle.normal,
+            ),
+          ),
         ),
         Expanded(
             flex: 1,
@@ -28,8 +28,8 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: const [
                 Padding(
-                  padding: EdgeInsets.only(right:20.0,top:8),
-                  child: Icon(Icons.add_box_outlined,size:30),
+                  padding: EdgeInsets.only(right: 20.0),
+                  child: Icon(Icons.add_box_outlined, size: 30),
                 ),
               ],
             ))

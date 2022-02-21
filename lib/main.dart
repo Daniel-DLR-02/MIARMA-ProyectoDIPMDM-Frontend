@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:miarma_app/screens/login_screen.dart';
 import 'package:miarma_app/screens/menu_screen.dart';
+import 'package:miarma_app/screens/profile_screen.dart';
 import 'package:miarma_app/screens/register_screen.dart';
+import 'package:miarma_app/screens/search_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Miarma',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -22,7 +24,9 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const MenuScreen(),
         '/login': (context) => const LoginScreen(),
-        '/register': (context) => const RegisterScreen()
+        '/register': (context) => const RegisterScreen(),
+        '/profile': (context) => const ProfileScreen(),
+        '/search': (context) => const SearchScreen()
       },
     );
   }
