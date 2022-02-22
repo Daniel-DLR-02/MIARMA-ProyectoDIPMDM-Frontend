@@ -7,11 +7,9 @@ abstract class PostsEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class FetchPostWithType extends PostsEvent {
-  final String type;
-
-  const FetchPostWithType(this.type);
+class FetchPost extends PostsEvent {
+  const FetchPost();
 
   @override
-  List<Object> get props => [type];
+  List<Object> get props => [];
 }

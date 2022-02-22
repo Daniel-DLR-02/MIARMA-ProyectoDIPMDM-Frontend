@@ -11,9 +11,8 @@ class PostsInitial extends PostsState {}
 
 class PostsFetched extends PostsState {
   final List<Post> posts;
-  final String type;
 
-  const PostsFetched(this.posts, this.type);
+  const PostsFetched(this.posts);
 
   @override
   List<Object> get props => [posts];

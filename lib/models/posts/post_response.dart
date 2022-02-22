@@ -1,5 +1,3 @@
-import 'package:miarma_app/models/movies/post_response.dart';
-
 class PostsResponse {
   PostsResponse({
     required this.content,
