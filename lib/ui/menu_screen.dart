@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:miarma_app/screens/profile_screen.dart';
-import 'package:miarma_app/screens/search_screen.dart';
+import 'package:miarma_app/ui/profile_screen.dart';
+import 'package:miarma_app/ui/search_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'home_screen.dart';
 

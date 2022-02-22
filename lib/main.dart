@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:miarma_app/screens/login_screen.dart';
-import 'package:miarma_app/screens/menu_screen.dart';
-import 'package:miarma_app/screens/profile_screen.dart';
-import 'package:miarma_app/screens/register_screen.dart';
-import 'package:miarma_app/screens/search_screen.dart';
+import 'package:miarma_app/ui/login_screen.dart';
+import 'package:miarma_app/ui/menu_screen.dart';
+import 'package:miarma_app/ui/profile_screen.dart';
+import 'package:miarma_app/ui/register_screen.dart';
+import 'package:miarma_app/ui/search_screen.dart';
 
 void main() {
   runApp(const MyApp());
