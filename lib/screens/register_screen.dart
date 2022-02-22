@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -18,6 +19,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String _range = '';
   String _rangeCount = '';
   TextEditingController dateinput = TextEditingController();
+  final _imagePicker = ImagePicker();
+  String imageSelect = "Imagen no selecionada";
+  FilePickerResult? result;
 
   @override
   void initState() {
@@ -131,56 +135,44 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   ),
                                 ),
                               ),
-
-                              /*SizedBox(
-                                height: 80,
-                                child: Container(
-                                  margin: const EdgeInsets.all(10),
-                                  padding: const EdgeInsets.all(10),
-                                  child: const TextField(
-                                    decoration: InputDecoration(
-                                      border: OutlineInputBorder(),
-                                      labelText: 'Avatar',
-                                    ),
-                                  ),
-                                ),
-                              ),*/
-
                               Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 15.0),
                                 child: TextField(
-                                  controller:
-                                      dateinput, //editing controller of this TextField
                                   decoration: const InputDecoration(
-                                      icon: Icon(Icons
-                                          .calendar_today), //icon of text field
-                                      labelText:
-                                          "Fecha de nacimiento" //label text of field
-                                      ),
-                                  readOnly:
-                                      true, //set it true, so that user will not able to edit text
+                                      icon: Icon(Icons.file_upload),
+                                      labelText: "Avatar"),
+                                  readOnly: true,
+                                  onTap: () async {
+                                    pickFiles("Image");
+                                  },
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 15.0),
+                                child: TextField(
+                                  controller: dateinput,
+                                  decoration: const InputDecoration(
+                                      icon: Icon(Icons.calendar_today),
+                                      labelText: "Fecha de nacimiento"),
+                                  readOnly: true,
                                   onTap: () async {
                                     DateTime? pickedDate = await showDatePicker(
                                         context: context,
                                         initialDate: DateTime.now(),
-                                        firstDate: DateTime(
-                                            2000), //DateTime.now() - not to allow to choose before today.
+                                        firstDate: DateTime(2000),
                                         lastDate: DateTime(2101));
 
                                     if (pickedDate != null) {
-                                      print(
-                                          pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                                      print(pickedDate);
                                       String formattedDate =
                                           DateFormat('yyyy-MM-dd')
                                               .format(pickedDate);
-                                      print(
-                                          formattedDate); //formatted date output using intl package =>  2021-03-16
-                                      //you can implement different kind of Date Format here according to your requirement
+                                      print(formattedDate);
 
                                       setState(() {
-                                        dateinput.text =
-                                            formattedDate; //set output date to TextField value.
+                                        dateinput.text = formattedDate;
                                       });
                                     } else {
                                       print("Date is not selected");
@@ -227,5 +219,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ],
                       ),
                     )))));
+  }
+
+  pickFiles(String filetype) async {
+    if (filetype == "Image") {
+      imageSelect = "Imagen Seleccionada";
+      result = await FilePicker.platform.pickFiles(type: FileType.image);
+
+      imageSelect = result!.files.first.name;
+
+      setState(() {});
+    }
   }
 }
