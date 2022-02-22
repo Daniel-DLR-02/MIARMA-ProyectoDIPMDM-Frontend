@@ -1,19 +1,19 @@
 import 'dart:convert';
 import 'package:http/http.dart';
-import 'package:miarma_app/models/posts/post_response.dart';
-import 'package:miarma_app/repository/PostRepository/post_repository.dart';
+import '../../models/posts/post_response.dart';
 import '../constants.dart';
+import 'post_repository.dart';
 
 class PostRepositoryImpl extends PostRepository {
   final Client _client = Client();
 
   @override
   Future<List<Post>> fetchPosts(String type) async {
-    final response = await _client.get(Uri.parse('$Constant.baseUrl/posts'));
+    final response = await _client.get(Uri.parse('$Constants.baseUrl'));
     if (response.statusCode == 200) {
-      return List<Post>.fromJson(json.decode(response.body));
+      return PostsResponse.fromJson(json.decode(response.body)).content;
     } else {
-      throw Exception('Fail to load posts');
+      throw Exception('Fail to load movies');
     }
   }
 }
