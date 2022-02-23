@@ -15,7 +15,7 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
- Widget getSearch() {
+  Widget getSearch() {
     var size = MediaQuery.of(context).size;
     return SingleChildScrollView(
         child: Column(
@@ -53,10 +53,10 @@ class _SearchScreenState extends State<SearchScreen> {
         const SizedBox(
           height: 15,
         ),
-        SingleChildScrollView(
+        const SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Padding(
-            padding: const EdgeInsets.only(left: 15),
+            padding: EdgeInsets.only(left: 15),
           ),
         ),
         const SizedBox(
@@ -66,4 +66,3 @@ class _SearchScreenState extends State<SearchScreen> {
     ));
   }
 }
-

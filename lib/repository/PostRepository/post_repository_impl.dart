@@ -4,6 +4,7 @@ import '../constants.dart';
 import 'package:http/http.dart';
 import 'post_repository.dart';
 import 'dart:io';
+
 class PostRepositoryImpl extends PostRepository {
   final Client _client = Client();
 
@@ -12,8 +13,8 @@ class PostRepositoryImpl extends PostRepository {
     // final response = await _client.get(Uri.parse('$Constants.baseUrl'));
     //String token = await Candidate().getToken();
     String token = Constants.token;
-    final response =
-        await _client.get(Uri.parse('${Constants.baseUrl}/post/public'), headers: {
+    final response = await _client
+        .get(Uri.parse('${Constants.baseUrl}/post/public'), headers: {
       HttpHeaders.contentTypeHeader: "application/json",
       HttpHeaders.authorizationHeader: "Bearer $token"
     });

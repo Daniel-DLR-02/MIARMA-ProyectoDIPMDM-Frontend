@@ -87,8 +87,8 @@ Widget _createPublicView(BuildContext context, List<Post> posts) {
           ],
         ),
         SizedBox(
-          height: contentHeight-170,
-          width:contentWidth,
+          height: contentHeight - 170,
+          width: contentWidth,
           child: ListView.separated(
             itemBuilder: (BuildContext context, int index) {
               return _createPublicViewItem(context, posts[index]);
@@ -109,13 +109,15 @@ Widget _createPublicView(BuildContext context, List<Post> posts) {
 Widget _createPublicViewItem(BuildContext context, Post post) {
   final contentWidth = MediaQuery.of(context).size.width;
   final contentHeight = MediaQuery.of(context).size.height;
-  String imageUrl = post.ficheroAdjuntoResized.replaceAll("http://localhost:8080", Constants.baseUrl);
-  String imageUrlAvatar = post.usuario.avatar.replaceAll("http://localhost:8080", Constants.baseUrl);
+  String imageUrl = post.ficheroAdjuntoResized
+      .replaceAll("http://localhost:8080", Constants.baseUrl);
+  String imageUrlAvatar = post.usuario.avatar
+      .replaceAll("http://localhost:8080", Constants.baseUrl);
 
   return Column(
     children: <Widget>[
       Padding(
-        padding: const EdgeInsets.only(top:8.0),
+        padding: const EdgeInsets.only(top: 8.0),
         child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -124,28 +126,31 @@ Widget _createPublicViewItem(BuildContext context, Post post) {
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0),
                     child: ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),
-                        child: CachedNetworkImage(
-                            placeholder: (context, url) => const Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                            
-                            imageUrl: imageUrlAvatar,
-                            width: 30,
-                            height:30,
-                            fit: BoxFit.cover,
-                          ),
+                      borderRadius: BorderRadius.circular(20.0),
+                      child: CachedNetworkImage(
+                        placeholder: (context, url) => const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                        imageUrl: imageUrlAvatar,
+                        httpHeaders: {
+                          "Authorization": "Bearer " + Constants.token
+                        },
+                        width: 30,
+                        height: 30,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   const SizedBox(width: 10.0),
                   Text(
                     post.usuario.nick,
-                    style: const TextStyle(fontWeight: FontWeight.bold,fontSize:15),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 15),
                   )
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.only(right:8.0),
+                padding: const EdgeInsets.only(right: 8.0),
                 child: IconButton(
                   icon: const Icon(Icons.more_vert),
                   onPressed: () {},
@@ -162,6 +167,7 @@ Widget _createPublicViewItem(BuildContext context, Post post) {
               child: CircularProgressIndicator(),
             ),
             imageUrl: imageUrl,
+            httpHeaders: {"Authorization": "Bearer " + Constants.token},
             width: contentWidth,
             height: double.infinity,
             fit: BoxFit.cover,
