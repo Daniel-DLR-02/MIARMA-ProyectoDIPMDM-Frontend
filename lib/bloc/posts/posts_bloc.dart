@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../models/posts/post_response.dart';
-import '../repository/PostRepository/post_repository.dart';
+import '../../models/posts/post_response.dart';
+import '../../repository/PostRepository/post_repository.dart';
 part 'posts_event.dart';
 part 'posts_state.dart';
 

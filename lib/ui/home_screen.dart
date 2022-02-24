@@ -5,7 +5,7 @@ import 'package:miarma_app/ui/widgets/home_app_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../bloc/posts_bloc.dart';
+import '../bloc/posts/posts_bloc.dart';
 import '../models/posts/post_response.dart';
 import '../repository/PostRepository/post_repository.dart';
 import '../repository/PostRepository/post_repository_impl.dart';
