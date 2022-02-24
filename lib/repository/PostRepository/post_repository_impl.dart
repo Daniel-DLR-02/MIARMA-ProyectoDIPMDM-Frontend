@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../models/posts/post_response.dart';
 import '../constants.dart';
 import 'package:http/http.dart';
@@ -12,7 +14,9 @@ class PostRepositoryImpl extends PostRepository {
   Future<List<Post>> fetchPosts() async {
     // final response = await _client.get(Uri.parse('$Constants.baseUrl'));
     //String token = await Candidate().getToken();
-    String token = Constants.token;
+    final prefs = await SharedPreferences.getInstance();
+
+    String? token = prefs.getString('token');
     final response = await _client
         .get(Uri.parse('${Constants.baseUrl}/post/public'), headers: {
       HttpHeaders.contentTypeHeader: "application/json",

@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:miarma_app/models/login/login_dto.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../bloc/auth/login/login_bloc.dart';
 import '../repository/auth/login/auth_repository.dart';
 import '../repository/auth/login/auth_repository_impl.dart';
+import '../repository/constants.dart';
 import 'home_screen.dart';
 
 /*class LoginScreen extends StatefulWidget {
@@ -163,14 +164,15 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: Center(
         child: Container(
-            color: const Color(0xff0F7EDD),
             padding: const EdgeInsets.all(20),
             child: BlocConsumer<LoginBloc, LoginState>(
                 listenWhen: (context, state) {
               return state is LoginSuccessState || state is LoginErrorState;
-            }, listener: (context, state) {
+            }, listener: (context, state) async {
               if (state is LoginSuccessState) {
+                final prefs = await SharedPreferences.getInstance();
                 // Shared preferences > guardo el token
+                prefs.setString('token', state.loginResponse.token);
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const HomeScreen()),
@@ -201,12 +203,137 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget buildForm(BuildContext context) {
+    double deviceWidth = MediaQuery.of(context).size.width;
     return Form(
-      key: _formKey,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset('assets/images/logo.png'),
+        key: _formKey,
+        child: SafeArea(
+            child: SingleChildScrollView(
+                child: ConstrainedBox(
+                    constraints: BoxConstraints(
+                      minHeight: MediaQuery.of(context).size.height - 90,
+                    ),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Miarmapp',
+                            style: GoogleFonts.oleoScript(
+                              color: Colors.black,
+                              textStyle: Theme.of(context).textTheme.headline4,
+                              fontSize: 40,
+                              fontWeight: FontWeight.w100,
+                              fontStyle: FontStyle.normal,
+                            ),
+                          ),
+                          const Divider(
+                            height: 20,
+                            thickness: .1,
+                            indent: 20,
+                            endIndent: 20,
+                            color: Colors.black,
+                          ),
+                          Column(
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.all(20),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.only(top: 50),
+                                width: deviceWidth - 100,
+                                child: TextFormField(
+                                  controller: nickController,
+                                  decoration: const InputDecoration(
+                                      suffixIcon: Icon(Icons.email),
+                                      suffixIconColor: Colors.white,
+                                      hintText: 'Nick',
+                                      focusedBorder: UnderlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.white))),
+                                  onSaved: (String? value) {
+                                    // This optional block of code can be used to run
+                                    // code when the user saves the form.
+                                  },
+                                ),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.only(top: 20),
+                                width: deviceWidth - 100,
+                                child: TextFormField(
+                                  controller: passwordController,
+                                  obscureText: true,
+                                  decoration: const InputDecoration(
+                                      suffixIcon: Icon(Icons.vpn_key),
+                                      suffixIconColor: Colors.white,
+                                      hintText: 'Password',
+                                      focusedBorder: UnderlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.white))),
+                                  onSaved: (String? value) {
+                                    // This optional block of code can be used to run
+                                    // code when the user saves the form.
+                                  },
+                                  validator: (value) {
+                                    return (value == null || value.isEmpty)
+                                        ? 'Write a password'
+                                        : null;
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                          TextButton(
+                            onPressed: () {},
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                RichText(
+                                  text: const TextSpan(
+                                      text: 'Recovery Password \n',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15,
+                                        color: Colors.grey,
+                                      )),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                              height: 50,
+                              width: deviceWidth,
+                              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                              child: TextButton(
+                                child: const Text('Log In',
+                                    style: TextStyle(
+                                        color: Color.fromARGB(
+                                            255, 255, 255, 255))),
+                                style: TextButton.styleFrom(
+                                    backgroundColor: Colors.black),
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/');
+                                },
+                              )),
+                          Row(
+                            children: <Widget>[
+                              const Text('Not a member?'),
+                              TextButton(
+                                child: const Text(
+                                  'Register now',
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/register');
+                                },
+                              )
+                            ],
+                            mainAxisAlignment: MainAxisAlignment.center,
+                          ),
+                        ],
+                      ),
+                    ))))
+
+        /*Image.asset('assets/images/logo.png'),
           Container(
             margin: const EdgeInsets.only(top: 50),
             child: TextFormField(
@@ -267,9 +394,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: const TextStyle(color: Colors.white),
                   textAlign: TextAlign.center,
                 )),
-          )
-        ],
-      ),
-    );
+          )*/
+
+        );
   }
 }
