@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:miarma_app/repository/preferences_utils.dart';
 import 'package:miarma_app/ui/widgets/error_page.dart';
 import 'package:miarma_app/ui/widgets/home_app_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -24,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    PreferenceUtils.init();
     postRepository = PostRepositoryImpl();
   }
 
@@ -106,9 +108,16 @@ Widget _createPublicView(BuildContext context, List<Post> posts) {
   );
 }
 
-Widget _createPublicViewItem(BuildContext context, Post post) {
+Widget _createPublicViewItem(
+  BuildContext context,
+  Post post,
+) {
   final contentWidth = MediaQuery.of(context).size.width;
   final contentHeight = MediaQuery.of(context).size.height;
+
+  String? token = PreferenceUtils.getString("token");
+
+  print(token);
   String imageUrl = post.ficheroAdjuntoResized
       .replaceAll("http://localhost:8080", Constants.baseUrl);
   String imageUrlAvatar = post.usuario.avatar
@@ -132,9 +141,7 @@ Widget _createPublicViewItem(BuildContext context, Post post) {
                           child: CircularProgressIndicator(),
                         ),
                         imageUrl: imageUrlAvatar,
-                        httpHeaders: {
-                          "Authorization": "Bearer " + Constants.token
-                        },
+                        httpHeaders: {"Authorization": "Bearer " + token!},
                         width: 30,
                         height: 30,
                         fit: BoxFit.cover,
@@ -167,7 +174,7 @@ Widget _createPublicViewItem(BuildContext context, Post post) {
               child: CircularProgressIndicator(),
             ),
             imageUrl: imageUrl,
-            httpHeaders: {"Authorization": "Bearer " + Constants.token},
+            httpHeaders: {"Authorization": "Bearer " + token},
             width: contentWidth,
             height: double.infinity,
             fit: BoxFit.cover,

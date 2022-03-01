@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:miarma_app/models/login/login_dto.dart';
+import 'package:miarma_app/ui/menu_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../bloc/auth/login/login_bloc.dart';
 import '../repository/auth/login/auth_repository.dart';
@@ -175,7 +176,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 prefs.setString('token', state.loginResponse.token);
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                  MaterialPageRoute(builder: (context) => const MenuScreen()),
                 );
               } else if (state is LoginErrorState) {
                 _showSnackbar(context, state.message);
@@ -282,24 +283,8 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ],
                           ),
-                          TextButton(
-                            onPressed: () {},
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                RichText(
-                                  text: const TextSpan(
-                                      text: 'Recovery Password \n',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15,
-                                        color: Colors.grey,
-                                      )),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
+
+                          /*Container(
                               height: 50,
                               width: deviceWidth,
                               padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -311,7 +296,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                 style: TextButton.styleFrom(
                                     backgroundColor: Colors.black),
                                 onPressed: () {
-                                  Navigator.pushNamed(context, '/');
+                                  setState() {
+                                    _createBody(context);
+                                  }
                                 },
                               )),
                           Row(
@@ -328,7 +315,33 @@ class _LoginScreenState extends State<LoginScreen> {
                               )
                             ],
                             mainAxisAlignment: MainAxisAlignment.center,
-                          ),
+                          ),*/
+                          GestureDetector(
+                            onTap: () {
+                              if (_formKey.currentState!.validate()) {
+                                final loginDto = LoginDto(
+                                    nick: nickController.text,
+                                    password: passwordController.text);
+                                BlocProvider.of<LoginBloc>(context)
+                                    .add(DoLoginEvent(loginDto));
+                              }
+                            },
+                            child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                margin: const EdgeInsets.only(
+                                    top: 30, left: 30, right: 30),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 50, vertical: 20),
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.black, width: 2),
+                                    borderRadius: BorderRadius.circular(50)),
+                                child: Text(
+                                  'Sign In'.toUpperCase(),
+                                  style: const TextStyle(color: Colors.black),
+                                  textAlign: TextAlign.center,
+                                )),
+                          )
                         ],
                       ),
                     ))))
