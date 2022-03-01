@@ -99,17 +99,32 @@ class Post {
 class UsuarioDTO {
   UsuarioDTO({
     required this.nick,
+    required this.nombre,
+    required this.fechaDeNacimiento,
+    required this.numeroSeguidores,
+    required this.numeroSeguidos,
+    required this.numeroPublicaciones,
     required this.email,
     required this.avatar,
     required this.perfilPublico,
   });
   late final String nick;
+  late final String nombre;
+  late final String fechaDeNacimiento;
+  late final int numeroSeguidores;
+  late final int numeroSeguidos;
+  late final int numeroPublicaciones;
   late final String email;
   late final String avatar;
   late final bool perfilPublico;
 
   UsuarioDTO.fromJson(Map<String, dynamic> json) {
     nick = json['nick'];
+    nombre = json['nombre'];
+    fechaDeNacimiento = json['fechaDeNacimiento'];
+    numeroSeguidores = json['numeroSeguidores'];
+    numeroSeguidos = json['numeroSeguidos'];
+    numeroPublicaciones = json['numeroPublicaciones'];
     email = json['email'];
     avatar = json['avatar'];
     perfilPublico = json['perfilPublico'];
@@ -118,6 +133,11 @@ class UsuarioDTO {
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
     _data['nick'] = nick;
+    _data['nombre'] = nombre;
+    _data['fechaDeNacimiento'] = fechaDeNacimiento;
+    _data['numeroSeguidores'] = numeroSeguidores;
+    _data['numeroSeguidos'] = numeroSeguidos;
+    _data['numeroPublicaciones'] = numeroPublicaciones;
     _data['email'] = email;
     _data['avatar'] = avatar;
     _data['perfilPublico'] = perfilPublico;
@@ -129,23 +149,23 @@ class Pageable {
   Pageable({
     required this.sort,
     required this.offset,
-    required this.pageNumber,
     required this.pageSize,
+    required this.pageNumber,
     required this.unpaged,
     required this.paged,
   });
   late final Sort sort;
   late final int offset;
-  late final int pageNumber;
   late final int pageSize;
+  late final int pageNumber;
   late final bool unpaged;
   late final bool paged;
 
   Pageable.fromJson(Map<String, dynamic> json) {
     sort = Sort.fromJson(json['sort']);
     offset = json['offset'];
-    pageNumber = json['pageNumber'];
     pageSize = json['pageSize'];
+    pageNumber = json['pageNumber'];
     unpaged = json['unpaged'];
     paged = json['paged'];
   }
@@ -154,8 +174,8 @@ class Pageable {
     final _data = <String, dynamic>{};
     _data['sort'] = sort.toJson();
     _data['offset'] = offset;
-    _data['pageNumber'] = pageNumber;
     _data['pageSize'] = pageSize;
+    _data['pageNumber'] = pageNumber;
     _data['unpaged'] = unpaged;
     _data['paged'] = paged;
     return _data;
