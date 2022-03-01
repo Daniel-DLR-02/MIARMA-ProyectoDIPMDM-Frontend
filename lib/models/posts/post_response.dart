@@ -67,7 +67,7 @@ class Post {
   });
   late final int id;
   late final String titulo;
-  late final Usuario usuario;
+  late final UsuarioDTO usuario;
   late final String texto;
   late final String ficheroAdjunto;
   late final String ficheroAdjuntoResized;
@@ -76,7 +76,7 @@ class Post {
   Post.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     titulo = json['titulo'];
-    usuario = Usuario.fromJson(json['usuario']);
+    usuario = UsuarioDTO.fromJson(json['usuario']);
     texto = json['texto'];
     ficheroAdjunto = json['ficheroAdjunto'];
     ficheroAdjuntoResized = json['ficheroAdjuntoResized'];
@@ -96,8 +96,8 @@ class Post {
   }
 }
 
-class Usuario {
-  Usuario({
+class UsuarioDTO {
+  UsuarioDTO({
     required this.nick,
     required this.email,
     required this.avatar,
@@ -108,7 +108,7 @@ class Usuario {
   late final String avatar;
   late final bool perfilPublico;
 
-  Usuario.fromJson(Map<String, dynamic> json) {
+  UsuarioDTO.fromJson(Map<String, dynamic> json) {
     nick = json['nick'];
     email = json['email'];
     avatar = json['avatar'];

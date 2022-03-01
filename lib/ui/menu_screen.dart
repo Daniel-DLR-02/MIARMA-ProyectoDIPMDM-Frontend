@@ -1,7 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:miarma_app/ui/profile_screen.dart';
 import 'package:miarma_app/ui/search_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../repository/constants.dart';
+import '../repository/preferences_utils.dart';
 import 'home_screen.dart';
 
 class MenuScreen extends StatefulWidget {
@@ -13,6 +16,9 @@ class MenuScreen extends StatefulWidget {
 
 class _MenuScreenState extends State<MenuScreen> {
   int _currentIndex = 0;
+  String? avatar_sin_formato;
+  String? avatar_url;
+  String? token;
 
   List<Widget> pages = [
     const HomeScreen(),
@@ -21,15 +27,25 @@ class _MenuScreenState extends State<MenuScreen> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    PreferenceUtils.init();
+    avatar_sin_formato = PreferenceUtils.getString('avatar');
+    avatar_url = avatar_sin_formato?.replaceAll(
+        "http://localhost:8080", Constants.baseUrl);
+    token = PreferenceUtils.getString("token");
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
             margin: MediaQuery.of(context).padding,
             child: pages[_currentIndex]),
-        bottomNavigationBar: _buildBottomBar());
+        bottomNavigationBar: _buildBottomBar(avatar_url, token));
   }
 
-  Widget _buildBottomBar() {
+  Widget _buildBottomBar(avatar_url, token) {
     return Container(
         decoration: const BoxDecoration(
             border: Border(
@@ -82,9 +98,15 @@ class _MenuScreenState extends State<MenuScreen> {
                         width: 3)),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(100),
-                  child: Image.asset(
-                    'assets/images/avatar.jpg',
+                  child: CachedNetworkImage(
+                    placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    imageUrl: avatar_url,
+                    httpHeaders: {"Authorization": "Bearer " + token!},
+                    width: 30,
                     height: 30,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
