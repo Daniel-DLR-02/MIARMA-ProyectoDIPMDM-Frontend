@@ -123,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 child: TextFormField(
                                   controller: nickController,
                                   decoration: const InputDecoration(
-                                      suffixIcon: Icon(Icons.email),
+                                      suffixIcon: Icon(Icons.person),
                                       suffixIconColor: Colors.white,
                                       hintText: 'Nick',
                                       focusedBorder: UnderlineInputBorder(

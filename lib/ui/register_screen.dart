@@ -7,8 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../bloc/auth/login/login_bloc.dart';
 import '../repository/auth/login/auth_repository.dart';
 import '../repository/auth/login/auth_repository_impl.dart';
-import '../repository/constants.dart';
-import 'home_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -21,6 +19,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   late AuthRepository authRepository;
   final _formKey = GlobalKey<FormState>();
   TextEditingController nickController = TextEditingController();
+  TextEditingController nombreController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController emailController = TextEditingController();
 
@@ -122,9 +121,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 margin: const EdgeInsets.only(top: 50),
                                 width: deviceWidth - 100,
                                 child: TextFormField(
+                                  controller: nombreController,
+                                  decoration: const InputDecoration(
+                                      suffixIcon: Icon(Icons.person),
+                                      suffixIconColor: Colors.white,
+                                      hintText: 'Nombre',
+                                      focusedBorder: UnderlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.white))),
+                                  onSaved: (String? value) {
+                                    // This optional block of code can be used to run
+                                    // code when the user saves the form.
+                                  },
+                                ),
+                              ),
+                              Container(
+                                margin: const EdgeInsets.only(top: 50),
+                                width: deviceWidth - 100,
+                                child: TextFormField(
                                   controller: nickController,
                                   decoration: const InputDecoration(
-                                      suffixIcon: Icon(Icons.email),
+                                      suffixIcon: Icon(Icons.person),
                                       suffixIconColor: Colors.white,
                                       hintText: 'Nick',
                                       focusedBorder: UnderlineInputBorder(
@@ -178,6 +195,36 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   },
                                 ),
                               ),
+                              Container(
+                                margin: const EdgeInsets.only(top: 20),
+                                width: deviceWidth - 100,
+                                child: TextFormField(
+                                  controller: passwordController,
+                                  obscureText: true,
+                                  decoration: const InputDecoration(
+                                      suffixIcon: Icon(Icons.vpn_key),
+                                      suffixIconColor: Colors.white,
+                                      hintText: 'Password',
+                                      focusedBorder: UnderlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: Colors.white))),
+                                  onSaved: (String? value) {
+                                    // This optional block of code can be used to run
+                                    // code when the user saves the form.
+                                  },
+                                  validator: (value) {
+                                    return (value == null || value.isEmpty)
+                                        ? 'Write a password'
+                                        : null;
+                                  },
+                                ),
+                              ),
+
+                              //Controller booleano Publicaciones
+
+                              //Controller fecha nacimiento
+
+                              //avatar
                             ],
                           ),
                           GestureDetector(
