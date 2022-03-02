@@ -5,8 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:miarma_app/bloc/auth/register/register_bloc.dart';
 import 'package:miarma_app/bloc/image_pick/image_pick_bloc_bloc.dart';
 import 'package:miarma_app/models/login/login_dto.dart';
+import 'package:miarma_app/models/register/register_dto.dart';
 import 'package:miarma_app/ui/menu_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../bloc/auth/login/login_bloc.dart';
@@ -27,6 +29,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController nombreController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+  String filePath = '';
   String _selectedDate = '';
   String _dateCount = '';
   String _range = '';
@@ -43,7 +46,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return BlocProvider(
         create: (context) {
-          return LoginBloc(authRepository);
+          return RegisterBloc(authRepository);
         },
         child: _createBody(context));
   }
@@ -53,28 +56,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: Center(
         child: Container(
             padding: const EdgeInsets.all(20),
-            child: BlocConsumer<LoginBloc, LoginState>(
+            child: BlocConsumer<RegisterBloc, RegisterState>(
                 listenWhen: (context, state) {
-              return state is LoginSuccessState || state is LoginErrorState;
+              return state is RegisterSuccessState ||
+                  state is RegisterErrorState;
             }, listener: (context, state) async {
-              if (state is LoginSuccessState) {
-                final prefs = await SharedPreferences.getInstance();
+              if (state is RegisterSuccessState) {
                 // Shared preferences > guardo el token
-                prefs.setString('token', state.loginResponse.token);
-                prefs.setString('avatar', state.loginResponse.avatar);
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const MenuScreen()),
                 );
-              } else if (state is LoginErrorState) {
+              } else if (state is RegisterErrorState) {
                 _showSnackbar(context, state.message);
               }
             }, buildWhen: (context, state) {
-              return state is LoginInitialState || state is LoginLoadingState;
+              return state is RegisterInitialState ||
+                  state is RegisterLoadingState;
             }, builder: (ctx, state) {
-              if (state is LoginInitialState) {
+              if (state is RegisterInitialState) {
                 return buildForm(ctx);
-              } else if (state is LoginLoadingState) {
+              } else if (state is RegisterLoadingState) {
                 return const Center(child: CircularProgressIndicator());
               } else {
                 return buildForm(ctx);
@@ -205,7 +207,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   },
                                 ),
                               ),
-                              Container(
+                              /*Container(
                                 margin: const EdgeInsets.only(top: 20),
                                 width: deviceWidth - 100,
                                 child: TextFormField(
@@ -228,7 +230,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         : null;
                                   },
                                 ),
-                              ),
+                              ),*/
 
                               //Controller booleano Publicaciones
 
@@ -290,11 +292,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                             is ImageSelectedSuccessState) {
                                           print(
                                               'PATH ${state.pickedFile.path}');
+                                          filePath = state.pickedFile.path;
                                           return Column(children: [
                                             Image.file(
                                               File(state.pickedFile.path),
                                               height: 100,
-                                            ),
+                                            ) /*,
                                             ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
                                                   primary: Colors.black,
@@ -305,7 +308,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                   // state.pickedFile.path
                                                 },
                                                 child:
-                                                    const Text('Upload Image'))
+                                                    const Text('Upload Image'))*/
                                           ]);
                                         }
                                         return Center(
@@ -347,11 +350,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           GestureDetector(
                             onTap: () {
                               if (_formKey.currentState!.validate()) {
-                                final loginDto = LoginDto(
+                                final registerDto = RegisterDto(
+                                    nombre: nombreController.text,
                                     nick: nickController.text,
-                                    password: passwordController.text);
-                                BlocProvider.of<LoginBloc>(context)
-                                    .add(DoLoginEvent(loginDto));
+                                    email: emailController.text,
+                                    password: passwordController.text,
+                                    fechaNacimiento: dateController.text,
+                                    publico: true);
+                                BlocProvider.of<RegisterBloc>(context).add(
+                                    DoRegisterEvent(registerDto, filePath));
                               }
                             },
                             child: Container(
@@ -365,7 +372,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         color: Colors.black, width: 2),
                                     borderRadius: BorderRadius.circular(50)),
                                 child: Text(
-                                  'Sign In'.toUpperCase(),
+                                  'Sign Up'.toUpperCase(),
                                   style: const TextStyle(color: Colors.black),
                                   textAlign: TextAlign.center,
                                 )),
