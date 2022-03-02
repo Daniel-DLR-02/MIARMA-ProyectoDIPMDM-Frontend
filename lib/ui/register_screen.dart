@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:miarma_app/bloc/image_pick/image_pick_bloc_bloc.dart';
 import 'package:miarma_app/models/login/login_dto.dart';
 import 'package:miarma_app/ui/menu_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -261,8 +265,68 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     }
                                   },
                                 ),
-                              )
+                              ),
                               //avatar
+                              Container(
+                                margin: const EdgeInsets.only(top: 20),
+                                width: deviceWidth - 100,
+                                child: BlocProvider(
+                                  create: (context) {
+                                    return ImagePickBlocBloc();
+                                  },
+                                  child: BlocConsumer<ImagePickBlocBloc,
+                                          ImagePickBlocState>(
+                                      listenWhen: (context, state) {
+                                        return state
+                                            is ImageSelectedSuccessState;
+                                      },
+                                      listener: (context, state) {},
+                                      buildWhen: (context, state) {
+                                        return state is ImagePickBlocInitial ||
+                                            state is ImageSelectedSuccessState;
+                                      },
+                                      builder: (context, state) {
+                                        if (state
+                                            is ImageSelectedSuccessState) {
+                                          print(
+                                              'PATH ${state.pickedFile.path}');
+                                          return Column(children: [
+                                            Image.file(
+                                              File(state.pickedFile.path),
+                                              height: 100,
+                                            ),
+                                            ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  primary: Colors.black,
+                                                ),
+                                                onPressed: () {
+                                                  // TODO el evento que debeis crear en el BLoC para
+                                                  // poder subir la imagen que tenemos guardada en
+                                                  // state.pickedFile.path
+                                                },
+                                                child:
+                                                    const Text('Upload Image'))
+                                          ]);
+                                        }
+                                        return Center(
+                                            child: ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                  primary: Colors.black,
+                                                ),
+                                                onPressed: () {
+                                                  BlocProvider.of<
+                                                              ImagePickBlocBloc>(
+                                                          context)
+                                                      .add(
+                                                          const SelectImageEvent(
+                                                              ImageSource
+                                                                  .gallery));
+                                                },
+                                                child: const Text(
+                                                    'Select Image')));
+                                      }),
+                                ),
+                              ),
                             ],
                           ),
                           Row(
