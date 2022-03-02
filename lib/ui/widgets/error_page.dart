@@ -21,12 +21,12 @@ class ErrorPage extends StatelessWidget {
             message,
             textAlign: TextAlign.center,
           ),
-          ElevatedButton(
-            onPressed: () => retry,
+          /*ElevatedButton(
+            onPressed: () => retry(),
             child: const Text(
               'Retry',
             ),
-          ),
+          ),*/
         ],
       ),
     );

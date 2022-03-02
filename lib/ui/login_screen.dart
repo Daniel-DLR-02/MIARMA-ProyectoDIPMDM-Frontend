@@ -118,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 padding: EdgeInsets.all(20),
                               ),
                               Container(
-                                margin: const EdgeInsets.only(top: 50),
+                                margin: const EdgeInsets.only(top: 0),
                                 width: deviceWidth - 100,
                                 child: TextFormField(
                                   controller: nickController,
@@ -174,7 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: Container(
                                 width: MediaQuery.of(context).size.width,
                                 margin: const EdgeInsets.only(
-                                    top: 30, left: 30, right: 30),
+                                    top: 100, left: 30, right: 30),
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 50, vertical: 20),
                                 decoration: BoxDecoration(

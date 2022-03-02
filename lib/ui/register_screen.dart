@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:miarma_app/models/login/login_dto.dart';
 import 'package:miarma_app/ui/menu_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,6 +23,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController nombreController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+  String _selectedDate = '';
+  String _dateCount = '';
+  String _range = '';
+  String _rangeCount = '';
+  TextEditingController dateController = TextEditingController();
 
   @override
   void initState() {
@@ -115,10 +121,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           Column(
                             children: [
                               const Padding(
-                                padding: EdgeInsets.all(20),
+                                padding: EdgeInsets.symmetric(horizontal: 20),
                               ),
                               Container(
-                                margin: const EdgeInsets.only(top: 50),
+                                margin: const EdgeInsets.only(top: 20),
                                 width: deviceWidth - 100,
                                 child: TextFormField(
                                   controller: nombreController,
@@ -136,7 +142,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                               ),
                               Container(
-                                margin: const EdgeInsets.only(top: 50),
+                                margin: const EdgeInsets.only(top: 20),
                                 width: deviceWidth - 100,
                                 child: TextFormField(
                                   controller: nickController,
@@ -154,7 +160,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                               ),
                               Container(
-                                margin: const EdgeInsets.only(top: 50),
+                                margin: const EdgeInsets.only(top: 20),
                                 width: deviceWidth - 100,
                                 child: TextFormField(
                                   controller: emailController,
@@ -204,7 +210,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   decoration: const InputDecoration(
                                       suffixIcon: Icon(Icons.vpn_key),
                                       suffixIconColor: Colors.white,
-                                      hintText: 'Password',
+                                      hintText: 'Repeat password',
                                       focusedBorder: UnderlineInputBorder(
                                           borderSide:
                                               BorderSide(color: Colors.white))),
@@ -223,7 +229,39 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               //Controller booleano Publicaciones
 
                               //Controller fecha nacimiento
+                              Container(
+                                margin: const EdgeInsets.only(top: 20),
+                                width: deviceWidth - 100,
+                                child: TextField(
+                                  controller: dateController,
+                                  decoration: const InputDecoration(
+                                    labelText: "Fecha de nacimiento",
+                                    suffixIcon: Icon(Icons.calendar_today),
+                                  ),
+                                  readOnly: true,
+                                  onTap: () async {
+                                    DateTime? pickedDate = await showDatePicker(
+                                        context: context,
+                                        initialDate: DateTime.now(),
+                                        firstDate: DateTime(2000),
+                                        lastDate: DateTime(2101));
 
+                                    if (pickedDate != null) {
+                                      print(pickedDate);
+                                      String formattedDate =
+                                          DateFormat('yyyy-MM-dd')
+                                              .format(pickedDate);
+                                      print(formattedDate);
+
+                                      setState(() {
+                                        dateController.text = formattedDate;
+                                      });
+                                    } else {
+                                      print("Date is not selected");
+                                    }
+                                  },
+                                ),
+                              )
                               //avatar
                             ],
                           ),
