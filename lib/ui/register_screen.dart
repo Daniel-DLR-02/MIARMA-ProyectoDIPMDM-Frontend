@@ -265,6 +265,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               //avatar
                             ],
                           ),
+                          Row(
+                            children: <Widget>[
+                              const Text('Already registered?'),
+                              TextButton(
+                                child: const Text(
+                                  'Sing up',
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/login');
+                                },
+                              )
+                            ],
+                            mainAxisAlignment: MainAxisAlignment.center,
+                          ),
                           GestureDetector(
                             onTap: () {
                               if (_formKey.currentState!.validate()) {

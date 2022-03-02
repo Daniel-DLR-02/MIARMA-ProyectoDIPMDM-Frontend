@@ -161,6 +161,21 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ],
                           ),
+                          Row(
+                            children: <Widget>[
+                              const Text('Not a member?'),
+                              TextButton(
+                                child: const Text(
+                                  'Register now',
+                                  style: TextStyle(fontSize: 12),
+                                ),
+                                onPressed: () {
+                                  Navigator.pushNamed(context, '/register');
+                                },
+                              )
+                            ],
+                            mainAxisAlignment: MainAxisAlignment.center,
+                          ),
                           GestureDetector(
                             onTap: () {
                               if (_formKey.currentState!.validate()) {
