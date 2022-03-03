@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:miarma_app/ui/profile_screen.dart';
 import 'package:miarma_app/ui/search_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../repository/constants.dart';
 import '../repository/preferences_utils.dart';
 import 'home_screen.dart';
@@ -18,7 +19,7 @@ class _MenuScreenState extends State<MenuScreen> {
   int _currentIndex = 0;
   String? avatar_sin_formato;
   String? avatar_url;
-  String? token;
+  String? token = "";
 
   List<Widget> pages = [
     const HomeScreen(),
@@ -103,7 +104,7 @@ class _MenuScreenState extends State<MenuScreen> {
                       child: CircularProgressIndicator(),
                     ),
                     imageUrl: avatar_url,
-                    httpHeaders: {"Authorization": "Bearer " + token!},
+                    httpHeaders: {"Authorization": "Bearer " + token},
                     width: 30,
                     height: 30,
                     fit: BoxFit.cover,

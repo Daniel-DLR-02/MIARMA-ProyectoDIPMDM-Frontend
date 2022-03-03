@@ -81,9 +81,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
         child: ListView(children: [
           Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-            const Padding(
-              padding: EdgeInsets.only(top: 1.0),
-              child: Icon(Icons.lock_outlined, size: 20),
+            Padding(
+              padding: const EdgeInsets.only(top: 1.0),
+              child: Icon(user.perfilPublico?Icons.lock_open_outlined:Icons.lock_outlined, size: 20),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 4.0),
@@ -95,28 +95,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     fontSize: 20),
               ),
             ),
-            Expanded(
-                flex: 1,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: const [
-                    Icon(Icons.add_box_outlined, size: 30),
-                  ],
-                ))
           ]),
           Row(
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 25, left: 5),
-                /*child: Container(
-                  height: 80.0,
-                  width: 80.0,
-                  decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                          fit: BoxFit.fill,
-                          image: AssetImage("assets/images/avatar.jpg"))),
-                ),*/
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(100),
                   child: CachedNetworkImage(
@@ -125,8 +108,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     imageUrl: user.avatar,
                     httpHeaders: {"Authorization": "Bearer " + token},
-                    width: 30,
-                    height: 30,
+                    width: 80,
+                    height: 80,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -138,7 +121,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Column(
                     children: [
                       Text(
-                        '4',
+                        user.numeroPublicaciones.toString(),
                         style: TextStyle(
                             color: Colors.black.withOpacity(.8),
                             fontWeight: FontWeight.bold,
@@ -163,7 +146,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Column(
                     children: [
                       Text(
-                        '92',
+                        user.numeroSeguidores.toString(),
                         style: TextStyle(
                             color: Colors.black.withOpacity(.8),
                             fontWeight: FontWeight.bold,
@@ -189,7 +172,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: Column(
                     children: [
                       Text(
-                        '125',
+                        user.numeroSeguidos.toString(),
                         style: TextStyle(
                             color: Colors.black.withOpacity(.8),
                             fontWeight: FontWeight.bold,
@@ -210,17 +193,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ],
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text("Name of the user",
+              Text(user.nombre,
                   style: TextStyle(
                     color: Colors.black.withOpacity(.8),
                     fontWeight: FontWeight.bold,
                   )),
               Padding(
-                padding: const EdgeInsets.only(top: 20.0),
-                child: Text("Seville",
+                padding: const EdgeInsets.only(top: 15.0),
+                child: Text(user.email,
+                    style: TextStyle(
+                      color: Colors.black.withOpacity(.8),
+                    )),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0),
+                child: Text(user.fechaDeNacimiento,
                     style: TextStyle(
                       color: Colors.black.withOpacity(.8),
                     )),
