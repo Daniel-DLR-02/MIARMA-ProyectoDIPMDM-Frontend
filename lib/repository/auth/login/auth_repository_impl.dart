@@ -28,6 +28,8 @@ class AuthRepositoryImpl extends AuthRepository {
     if (response.statusCode == 201) {
       prefs.setString(
           'token', LoginResponse.fromJson(json.decode(response.body)).token);
+      prefs.setString(
+          'avatar', LoginResponse.fromJson(json.decode(response.body)).avatar);
       return LoginResponse.fromJson(json.decode(response.body));
     } else {
       throw Exception('Fail to login');

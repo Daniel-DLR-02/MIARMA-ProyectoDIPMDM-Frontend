@@ -51,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 final prefs = await SharedPreferences.getInstance();
                 // Shared preferences > guardo el token
                 //prefs.setString('token', state.loginResponse.token);
-                prefs.setString('avatar', state.loginResponse.avatar);
+                //prefs.setString('avatar', state.loginResponse.avatar);
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const MenuScreen()),

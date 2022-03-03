@@ -299,18 +299,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                             Image.file(
                                               File(state.pickedFile.path),
                                               height: 100,
-                                            ) /*,
-                                            ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                  primary: Colors.black,
-                                                ),
-                                                onPressed: () {
-                                                  // TODO el evento que debeis crear en el BLoC para
-                                                  // poder subir la imagen que tenemos guardada en
-                                                  // state.pickedFile.path
-                                                },
-                                                child:
-                                                    const Text('Upload Image'))*/
+                                            )
                                           ]);
                                         }
                                         return Center(
