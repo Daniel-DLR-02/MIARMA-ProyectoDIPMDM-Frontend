@@ -11,7 +11,14 @@ class RegisterInitialState extends RegisterState {}
 
 class RegisterLoadingState extends RegisterState {}
 
-class RegisterSuccessState extends RegisterState {}
+class RegisterSuccessState extends RegisterState {
+  final RegisterResponse registerResponse;
+
+  const RegisterSuccessState(this.registerResponse);
+
+  @override
+  List<Object> get props => [registerResponse];
+}
 
 class RegisterErrorState extends RegisterState {
   final String message;

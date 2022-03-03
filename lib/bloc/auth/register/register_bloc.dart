@@ -25,7 +25,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     try {
       final registerResponse =
           await authRepository.register(event.registerDto, event.filePath);
-      emit(RegisterSuccessState());
+      emit(RegisterSuccessState(registerResponse));
       return;
     } on Exception catch (e) {
       emit(RegisterErrorState(e.toString()));

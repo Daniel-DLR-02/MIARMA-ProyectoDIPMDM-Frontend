@@ -62,7 +62,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   state is RegisterErrorState;
             }, listener: (context, state) async {
               if (state is RegisterSuccessState) {
+                final prefs = await SharedPreferences.getInstance();
                 // Shared preferences > guardo el token
+                prefs.setString('avatar', state.registerResponse.avatar);
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const MenuScreen()),
@@ -337,7 +339,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               const Text('Already registered?'),
                               TextButton(
                                 child: const Text(
-                                  'Sing up',
+                                  'Sing in',
                                   style: TextStyle(fontSize: 12),
                                 ),
                                 onPressed: () {
