@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import '../../models/posts/post_response.dart';
 import '../../models/user/usuario_actual.dart';
 import '../../repository/user/user_repository.dart';
 part 'user_event.dart';
@@ -15,7 +16,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   void _usersFetched(FetchUser event, Emitter<UserState> emit) async {
     try {
       final user = await userRepository.me();
-      emit(UserFetched(user));
+      final posts = await userRepository.userPosts();
+      emit(UserFetched(user, posts));
       return;
     } on Exception catch (e) {
       emit(UserFetchError(e.toString()));

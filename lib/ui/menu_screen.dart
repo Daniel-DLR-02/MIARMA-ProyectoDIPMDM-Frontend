@@ -31,7 +31,6 @@ class _MenuScreenState extends State<MenuScreen> {
   void initState() {
     super.initState();
     PreferenceUtils.init();
-
     avatar_sin_formato = PreferenceUtils.getString("avatar");
     avatar_url = avatar_sin_formato!
         .replaceAll("http://localhost:8080", Constants.baseUrl);

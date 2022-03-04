@@ -11,8 +11,9 @@ class UserInitial extends UserState {}
 
 class UserFetched extends UserState {
   final UsuarioActualResponse user;
+  final List<Post> posts;
 
-  const UserFetched(this.user);
+  const UserFetched(this.user, this.posts);
 
   @override
   List<Object> get props => [user];
