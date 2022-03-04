@@ -202,38 +202,41 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(user.nombre,
-                        style: TextStyle(
-                          color: Colors.black.withOpacity(.8),
-                          fontWeight: FontWeight.bold,
-                        )),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15.0),
-                      child: Text("Email: " + user.email,
+            SizedBox(
+              width: deviceWidth,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(user.nombre,
                           style: TextStyle(
                             color: Colors.black.withOpacity(.8),
+                            fontWeight: FontWeight.bold,
                           )),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10.0),
-                      child:
-                          Text("Fecha de nacimiento: " + user.fechaDeNacimiento,
-                              style: TextStyle(
-                                color: Colors.black.withOpacity(.8),
-                              )),
-                    ),
-                  ]),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 15.0),
+                        child: Text("Email: " + user.email,
+                            style: TextStyle(
+                              color: Colors.black.withOpacity(.8),
+                            )),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: Text(
+                            "Fecha de nacimiento: " + user.fechaDeNacimiento,
+                            style: TextStyle(
+                              color: Colors.black.withOpacity(.8),
+                            )),
+                      ),
+                    ]),
+              ),
             ),
-            const SizedBox(height: 12.0),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
               Container(
                 alignment: Alignment.center,
-                width: 275.0,
+                width: deviceWidth - 75,
                 height: 35.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4.0),
