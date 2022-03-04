@@ -70,7 +70,6 @@ Widget _createPublicView(BuildContext context, List<Post> posts) {
   final contentWidth = MediaQuery.of(context).size.width;
   final contentHeight = MediaQuery.of(context).size.height;
   return Scaffold(
-    appBar: const HomeAppBar(),
     body: ListView(
       children: <Widget>[
         Row(

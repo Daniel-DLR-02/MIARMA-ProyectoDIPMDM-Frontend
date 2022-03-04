@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:miarma_app/ui/profile_screen.dart';
 import 'package:miarma_app/ui/search_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:miarma_app/ui/widgets/home_app_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../repository/constants.dart';
 import '../repository/preferences_utils.dart';
@@ -40,6 +41,7 @@ class _MenuScreenState extends State<MenuScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: const HomeAppBar(),
         body: Container(
             margin: MediaQuery.of(context).padding,
             child: pages[_currentIndex]),
