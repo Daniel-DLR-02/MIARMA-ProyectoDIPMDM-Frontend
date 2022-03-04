@@ -35,6 +35,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String _range = '';
   String _rangeCount = '';
   TextEditingController dateController = TextEditingController();
+  bool publicController = true;
 
   @override
   void initState() {
@@ -209,34 +210,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   },
                                 ),
                               ),
-                              /*Container(
+                              Container(
                                 margin: const EdgeInsets.only(top: 20),
                                 width: deviceWidth - 100,
-                                child: TextFormField(
-                                  controller: passwordController,
-                                  obscureText: true,
-                                  decoration: const InputDecoration(
-                                      suffixIcon: Icon(Icons.vpn_key),
-                                      suffixIconColor: Colors.white,
-                                      hintText: 'Repeat password',
-                                      focusedBorder: UnderlineInputBorder(
-                                          borderSide:
-                                              BorderSide(color: Colors.white))),
-                                  onSaved: (String? value) {
-                                    // This optional block of code can be used to run
-                                    // code when the user saves the form.
-                                  },
-                                  validator: (value) {
-                                    return (value == null || value.isEmpty)
-                                        ? 'Write a password'
-                                        : null;
-                                  },
+                                child: Row(
+                                  children: [
+                                    Text("Público:"),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 50.0),
+                                      child: Switch(
+                                        value: publicController,
+                                        onChanged: (value) {
+                                          setState(() {
+                                            publicController = value;
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ),*/
-
-                              //Controller booleano Publicaciones
-
-                              //Controller fecha nacimiento
+                              ),
                               Container(
                                 margin: const EdgeInsets.only(top: 20),
                                 width: deviceWidth - 100,
@@ -347,7 +341,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     email: emailController.text,
                                     password: passwordController.text,
                                     fechaNacimiento: dateController.text,
-                                    publico: true);
+                                    publico: publicController);
                                 BlocProvider.of<RegisterBloc>(context).add(
                                     DoRegisterEvent(registerDto, filePath));
                               }

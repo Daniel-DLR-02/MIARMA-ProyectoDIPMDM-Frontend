@@ -18,8 +18,8 @@ class MenuScreen extends StatefulWidget {
 class _MenuScreenState extends State<MenuScreen> {
   int _currentIndex = 0;
   String? avatar_sin_formato;
-  String? avatar_url;
-  String? token = "";
+  String? avatar_url = "none";
+  String? token = "none";
 
   List<Widget> pages = [
     const HomeScreen(),
@@ -31,9 +31,10 @@ class _MenuScreenState extends State<MenuScreen> {
   void initState() {
     super.initState();
     PreferenceUtils.init();
-    avatar_sin_formato = PreferenceUtils.getString('avatar');
-    avatar_url = avatar_sin_formato?.replaceAll(
-        "http://localhost:8080", Constants.baseUrl);
+
+    avatar_sin_formato = PreferenceUtils.getString("avatar");
+    avatar_url = avatar_sin_formato!
+        .replaceAll("http://localhost:8080", Constants.baseUrl);
     token = PreferenceUtils.getString("token");
   }
 
