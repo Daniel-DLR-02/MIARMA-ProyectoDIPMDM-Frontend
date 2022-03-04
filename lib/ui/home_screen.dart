@@ -118,7 +118,7 @@ Widget _createPublicViewItem(
   String? token = PreferenceUtils.getString("token");
 
   print(token);
-  String imageUrl = post.ficheroAdjuntoResized
+  String imageUrl = post.ficheroAdjunto
       .replaceAll("http://localhost:8080", Constants.baseUrl);
   String imageUrlAvatar = post.usuario.avatar
       .replaceAll("http://localhost:8080", Constants.baseUrl);

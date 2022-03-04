@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../post_form.dart';
+
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomeAppBar({Key? key}) : super(key: key);
 
@@ -23,16 +25,26 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
         ),
         Expanded(
-            flex: 1,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: const [
-                Padding(
-                  padding: EdgeInsets.only(right: 20.0),
-                  child: Icon(Icons.add_box_outlined, size: 30),
-                ),
-              ],
-            ))
+          flex: 1,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const PostForm()),
+                      );
+                    },
+                    icon: const Icon(Icons.add_box_outlined,
+                        color: Colors.black, size: 28.0)),
+              ),
+            ],
+          ),
+        )
       ]),
     );
   }

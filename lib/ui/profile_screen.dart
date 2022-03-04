@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:miarma_app/bloc/user/user_bloc.dart';
 import 'package:miarma_app/ui/menu_screen.dart';
+import 'package:miarma_app/ui/post_form.dart';
 import 'package:miarma_app/ui/widgets/error_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -248,7 +249,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: const Text("Editar Perfil",
                     style: TextStyle(color: Colors.black)),
               ),
-              const Icon(Icons.expand_more_outlined, color: Colors.black)
+              const Icon(Icons.expand_more_outlined, color: Colors.black),
             ]),
             const SizedBox(height: 24.0),
             Divider(
