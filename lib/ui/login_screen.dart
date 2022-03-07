@@ -52,10 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 // Shared preferences > guardo el token
                 //prefs.setString('token', state.loginResponse.token);
                 //prefs.setString('avatar', state.loginResponse.avatar);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MenuScreen()),
-                );
+                Navigator.pushNamed(context, '/');
               } else if (state is LoginErrorState) {
                 _showSnackbar(context, state.message);
               }

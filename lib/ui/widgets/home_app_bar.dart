@@ -33,10 +33,9 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                 padding: const EdgeInsets.all(10.0),
                 child: IconButton(
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushNamed(
                         context,
-                        MaterialPageRoute(
-                            builder: (context) => const PostForm()),
+                        '/post-form',
                       );
                     },
                     icon: const Icon(Icons.add_box_outlined,

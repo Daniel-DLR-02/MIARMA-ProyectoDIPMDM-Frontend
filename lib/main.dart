@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:miarma_app/repository/preferences_utils.dart';
 import 'package:miarma_app/ui/login_screen.dart';
 import 'package:miarma_app/ui/menu_screen.dart';
+import 'package:miarma_app/ui/post_form.dart';
 import 'package:miarma_app/ui/profile_screen.dart';
 import 'package:miarma_app/ui/register_screen.dart';
 import 'package:miarma_app/ui/search_screen.dart';
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginScreen(),
         '/register': (context) => const RegisterScreen(),
         '/profile': (context) => const ProfileScreen(),
-        '/search': (context) => const SearchScreen()
+        '/search': (context) => const SearchScreen(),
+        '/post-form': (context) => const PostForm(),
       },
     );
   }

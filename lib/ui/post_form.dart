@@ -60,10 +60,7 @@ class _PostFormState extends State<PostForm> {
             }, listener: (context, state) async {
               if (state is CreatePostSuccessState) {
                 final prefs = await SharedPreferences.getInstance();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MenuScreen()),
-                );
+                Navigator.pushNamed(context, '/');
               } else if (state is CreatePostErrorState) {
                 _showSnackbar(context, state.message);
               }
